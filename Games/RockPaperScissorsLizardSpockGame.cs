@@ -8,7 +8,7 @@ namespace RockPaperScissors.Games
 {
     public class RockPaperScissorsLizardSpockGame : Game
     {
-        public RockPaperScissorsLizardSpockGame(int numberOfTurns) : base(numberOfTurns)
+        internal RockPaperScissorsLizardSpockGame(int numberOfTurns) : base(numberOfTurns)
         {
 
         }

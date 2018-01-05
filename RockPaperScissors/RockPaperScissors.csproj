@@ -42,20 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Games\Game.cs" />
-    <Compile Include="Games\IGame.cs" />
-    <Compile Include="Games\RockPaperScissors.cs" />
-    <Compile Include="Games\RockPaperScissorsLizardSpock.cs" />
-    <Compile Include="Players\ComputerPlayer.cs" />
-    <Compile Include="Players\HumanPlayer.cs" />
-    <Compile Include="Players\IPlayer.cs" />
-    <Compile Include="Players\StrategicComputerPlayer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Games\Games.csproj">
+      <Project>{2d4ddd7d-2342-4762-ae49-a1b09c76b81c}</Project>
+      <Name>Games</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Players\Players.csproj">
+      <Project>{da316700-b0df-4a70-867d-a85a7731d48b}</Project>
+      <Name>Players</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

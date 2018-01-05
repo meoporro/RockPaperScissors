@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RockPaperScissors", "RockPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{6AC71814-A159-46C9-AEF4-D364AA3DFE91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Games", "Games\Games.csproj", "{2D4DDD7D-2342-4762-AE49-A1B09C76B81C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Players", "Players\Players.csproj", "{DA316700-B0DF-4A70-867D-A85A7731D48B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{6AC71814-A159-46C9-AEF4-D364AA3DFE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC71814-A159-46C9-AEF4-D364AA3DFE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC71814-A159-46C9-AEF4-D364AA3DFE91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D4DDD7D-2342-4762-AE49-A1B09C76B81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D4DDD7D-2342-4762-AE49-A1B09C76B81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D4DDD7D-2342-4762-AE49-A1B09C76B81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D4DDD7D-2342-4762-AE49-A1B09C76B81C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA316700-B0DF-4A70-867D-A85A7731D48B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA316700-B0DF-4A70-867D-A85A7731D48B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA316700-B0DF-4A70-867D-A85A7731D48B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA316700-B0DF-4A70-867D-A85A7731D48B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
