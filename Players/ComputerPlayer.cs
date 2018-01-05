@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Players
 {
-    public class ComputerPlayer : IPlayer
+    public class ComputerPlayer : Player
     {
-        public void ChooseMove()
+        public override void ChooseMove()
         {
             throw new NotImplementedException();
         }

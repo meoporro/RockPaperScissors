@@ -8,7 +8,7 @@ namespace Players
 {
     public class StrategicComputerPlayer : ComputerPlayer
     {
-        public void ChooseMove()
+        public override void ChooseMove()
         {
             throw new NotImplementedException();
         }
