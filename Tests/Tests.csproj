@@ -48,11 +48,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Games\Games.csproj">
+      <Project>{2d4ddd7d-2342-4762-ae49-a1b09c76b81c}</Project>
+      <Name>Games</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Players\Players.csproj">
+      <Project>{da316700-b0df-4a70-867d-a85a7731d48b}</Project>
+      <Name>Players</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

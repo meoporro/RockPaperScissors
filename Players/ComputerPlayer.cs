@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RockPaperScissors.Players
+namespace Players
 {
     public class ComputerPlayer : IPlayer
     {
+        public void ChooseMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

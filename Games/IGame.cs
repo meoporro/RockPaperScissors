@@ -1,11 +1,11 @@
-﻿using RockPaperScissors.Players;
+﻿using Players;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RockPaperScissors.Games
+namespace Games
 {
     public interface IGame
     {

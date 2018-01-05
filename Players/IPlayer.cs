@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RockPaperScissors.Players
+namespace Players
 {
     public interface IPlayer
     {
+        void ChooseMove();
     }
 }

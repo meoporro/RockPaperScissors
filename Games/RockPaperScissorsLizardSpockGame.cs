@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RockPaperScissors.Games
+namespace Games
 {
     public class RockPaperScissorsLizardSpockGame : Game
     {
