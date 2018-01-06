@@ -1,27 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Games;
 using Players;
 
 namespace Tests
 {
     [TestClass]
-    public class Tests
+    public class TestsPlayers
     {
-        [TestMethod]
-        public void TestGameFactoryRockPaperScissorsGame()
-        {
-            WorkerTestGameFactory(SupportedGames.RockPaperScissors, typeof(RockPaperScissorsGame));
-        }
-
-        [TestMethod]
-        public void TestGameFactoryRockPaperScissorsLizardSpockGame()
-        {
-            WorkerTestGameFactory(SupportedGames.RockPaperScissorsLizardSpock, typeof(RockPaperScissorsLizardSpockGame));
-        }
-
-        // Add a test that cought the exception
-
         [TestMethod]
         public void TestPlayerFactoryHumanPlayer()
         {
@@ -40,19 +25,10 @@ namespace Tests
             WorkerTestPlayerFactory(SupportedPlayers.StrategicComputerPlayer, typeof(StrategicComputerPlayer));
         }
 
-        private void WorkerTestGameFactory(SupportedGames selectedGameType, Type expectedGameType)
-        {
-            var NumberOfTurns = 3;
-            var CreatedGame = Game.CreateGame(selectedGameType, NumberOfTurns);
-            Assert.IsInstanceOfType(CreatedGame, expectedGameType);
-        }
-
         private void WorkerTestPlayerFactory(SupportedPlayers selectedPlayerType, Type playerType)
         {
             var CreatedPlayer = Player.CreatePlayer(selectedPlayerType);
             Assert.IsInstanceOfType(CreatedPlayer, playerType);
         }
-
-
     }
 }
