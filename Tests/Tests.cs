@@ -20,7 +20,7 @@ namespace Tests
             WorkerTestGameFactory(SupportedGames.RockPaperScissorsLizardSpock, typeof(RockPaperScissorsLizardSpockGame));
         }
 
-        // Add a test that catched the exception
+        // Add a test that cought the exception
 
         [TestMethod]
         public void TestPlayerFactoryHumanPlayer()
