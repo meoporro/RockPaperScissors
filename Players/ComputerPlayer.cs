@@ -9,9 +9,11 @@ namespace Players
     public class ComputerPlayer : Player
     {
         protected Random RandomGenerator;
+        private int ComputerPlayerCounter = 1;
 
         internal ComputerPlayer()
         {
+            _Name = "Bot" + ComputerPlayerCounter++;
             RandomGenerator = new Random();
         }
 
@@ -22,7 +24,9 @@ namespace Players
 
         public override int SelectMove(List<string> supportedMoves)
         {
-            return RandomGenerator.Next(supportedMoves.Count);
+            int SelectedMove = RandomGenerator.Next(supportedMoves.Count);
+            Console.WriteLine("\n" + Name + " selects " + supportedMoves[SelectedMove]);
+            return SelectedMove;
         }
 
         protected class DefaultRandom : Random

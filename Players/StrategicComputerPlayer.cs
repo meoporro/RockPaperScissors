@@ -8,10 +8,12 @@ namespace Players
 {
     public class StrategicComputerPlayer : ComputerPlayer
     {
+        private int StrategicComputerPlayerCounter = 1;
         private int PreviousMove;
 
         internal StrategicComputerPlayer() : base()
         {
+            _Name = "StrategicBot" + StrategicComputerPlayerCounter++;
             PreviousMove = -1;
         }
 

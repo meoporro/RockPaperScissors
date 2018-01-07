@@ -11,7 +11,7 @@ namespace Games
     {
         List<string> SupportedMoves { get; }
 
-        void Play(IPlayer player1, IPlayer player2);
+        int Play(IPlayer player1, IPlayer player2);
 
         int DetermineTurnResult(int player1Move, int player2Move);
     }

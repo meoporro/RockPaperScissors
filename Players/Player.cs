@@ -14,6 +14,9 @@ namespace Players
 
     public abstract class Player : IPlayer
     {
+        protected string _Name;
+        public string Name { get { return _Name; } }
+        
         public static IPlayer CreatePlayer(SupportedPlayers selectedPlayerType)
         {
             switch (selectedPlayerType)

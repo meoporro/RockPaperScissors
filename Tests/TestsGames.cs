@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Games;
-
+using System.IO;
+using Players;
 
 namespace Tests
 {
@@ -20,7 +21,7 @@ namespace Tests
             WorkerTestGameFactory(SupportedGames.RockPaperScissorsLizardSpock, typeof(RockPaperScissorsLizardSpockGame));
         }
 
-        // Add a test that catched the exception
+        // Add a test that catches the exception
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCaseRockRock()
@@ -47,7 +48,6 @@ namespace Tests
 
             Assert.AreEqual(TurnResult, 2);
         }
-
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameRockScissors()
@@ -138,6 +138,34 @@ namespace Tests
             int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
 
             Assert.AreEqual(TurnResult, 0);
+        }
+
+        [TestMethod]
+        public void TestPlayRockPaperScissorsGame()
+        {
+            int NumberOfTurns = 3;
+            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+
+            int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
+            int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
+
+            string ConsoleInputString = "TestPlayer1\n" + "TestPlayer2\n";
+            for (int Turn = 0; Turn < NumberOfTurns; Turn++)
+            {
+                ConsoleInputString += ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
+            }
+
+            var ConsoleInput = new StringReader(ConsoleInputString);
+            Console.SetIn(ConsoleInput);
+
+            IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+
+            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer);
+            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer);
+
+            int GameResult = GameToPlay.Play(Player1, Player2);
+
+            Assert.AreEqual(GameResult, 2);
         }
 
         private void WorkerTestGameFactory(SupportedGames selectedGameType, Type expectedGameType)

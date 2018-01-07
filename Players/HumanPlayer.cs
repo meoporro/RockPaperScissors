@@ -8,8 +8,19 @@ namespace Players
 {
     public class HumanPlayer : Player
     {
+        internal HumanPlayer()
+        {
+            Console.WriteLine("What is your name?");
+            _Name = Console.ReadLine();
+        }
+
         public override int SelectMove(List<string> supportedMoves)
         {
+            Console.WriteLine("\n" + Name + ", select move:");
+            for (int MoveIndex = 0; MoveIndex < supportedMoves.Count(); MoveIndex++)
+            {
+                Console.WriteLine(MoveIndex + " - " + supportedMoves[MoveIndex]);
+            }
             return Int32.Parse(Console.ReadLine());
         }
     }
