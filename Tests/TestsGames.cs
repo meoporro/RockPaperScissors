@@ -152,7 +152,7 @@ namespace Tests
             string ConsoleInputString = "TestPlayer1\n" + "TestPlayer2\n";
             for (int Turn = 0; Turn < NumberOfTurns; Turn++)
             {
-                ConsoleInputString += ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
+                ConsoleInputString = ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
             }
 
             var ConsoleInput = new StringReader(ConsoleInputString);

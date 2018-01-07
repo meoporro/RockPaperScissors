@@ -115,7 +115,7 @@ namespace Tests
 
         private void WorkerHumanPlayerSelectMove(int consoleInputMove)
         {
-            var ConsoleInput = new StringReader(consoleInputMove.ToString());
+            var ConsoleInput = new StringReader("TestPlayer\n" + consoleInputMove.ToString());
             Console.SetIn(ConsoleInput);
             var HumanPlayer = Player.CreatePlayer(SupportedPlayers.HumanPlayer);
             var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
