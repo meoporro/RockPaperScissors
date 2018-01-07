@@ -60,8 +60,6 @@ namespace RockPaperScissors
                 }
 
                 if (PlayAgainInput == "n") PlayAgain = false;
-                Player1.Reset();
-                Player2.Reset();
             }
 
             Console.WriteLine("\n" + "Bye!");

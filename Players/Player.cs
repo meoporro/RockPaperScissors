@@ -25,6 +25,9 @@ namespace Players
         {
             switch (selectedPlayerType)
             {
+                case SupportedPlayers.Null:
+                    throw new ArgumentNullException();
+
                 case SupportedPlayers.HumanPlayer:
                     return new HumanPlayer(name);
 
@@ -55,10 +58,6 @@ namespace Players
             }
         }
 
-        public abstract int SelectMove(List<string> supportedMoves);
-        
-        public virtual void Reset()
-        {
-        }
+        public abstract int SelectMove(List<string> supportedMoves, int turn);
     }
 }

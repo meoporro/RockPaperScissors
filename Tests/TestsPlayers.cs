@@ -13,21 +13,32 @@ namespace Tests
         [TestMethod]
         public void TestPlayerFactoryHumanPlayer()
         {
-            WorkerTestPlayerFactory(SupportedPlayers.HumanPlayer, typeof(HumanPlayer));
+            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.HumanPlayer);
+            Assert.IsInstanceOfType(CreatedPlayer, typeof(HumanPlayer));
         }
 
         [TestMethod]
         public void TestPlayerFactoryComputerPlayer()
         {
-            WorkerTestPlayerFactory(SupportedPlayers.ComputerPlayer, typeof(ComputerPlayer));
+            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.ComputerPlayer);
+            Assert.IsInstanceOfType(CreatedPlayer, typeof(ComputerPlayer));
         }
 
         [TestMethod]
         public void TestPlayerFactoryStrategicComputerPlayer()
         {
-            WorkerTestPlayerFactory(SupportedPlayers.StrategicComputerPlayer, typeof(StrategicComputerPlayer));
+            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.StrategicComputerPlayer);
+            Assert.IsInstanceOfType(CreatedPlayer, typeof(StrategicComputerPlayer));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestPlayerFactoryNullArgument()
+        {
+            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.Null);
+            Assert.IsInstanceOfType(CreatedPlayer, typeof(StrategicComputerPlayer));
+        }
+        
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue0()
         {
@@ -60,31 +71,33 @@ namespace Tests
             Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
         }
 
-        private void WorkerTestPlayerFactory(SupportedPlayers selectedPlayerType, Type playerType)
+        private IPlayer WorkerTestPlayerFactory(SupportedPlayers selectedPlayerType)
         {
-            var CreatedPlayer = Player.CreatePlayer(selectedPlayerType, "TestPlayer");
-            Assert.IsInstanceOfType(CreatedPlayer, playerType);
+            return Player.CreatePlayer(selectedPlayerType, "TestPlayer");
         }
 
         [TestMethod]
         public void TestComputerPlayerChooseMoveValue0()
         {
             int DeterministicMove = 0;
-            WorkerComputerPlayerSelectMove(DeterministicMove);
+            int SelectedMove = WorkerComputerPlayerSelectMove(DeterministicMove);
+            Assert.AreEqual(DeterministicMove, SelectedMove);
         }
 
         [TestMethod]
         public void TestComputerPlayerChooseMoveValue1()
         {
             int DeterministicMove = 1;
-            WorkerComputerPlayerSelectMove(DeterministicMove);
+            int SelectedMove = WorkerComputerPlayerSelectMove(DeterministicMove);
+            Assert.AreEqual(DeterministicMove, SelectedMove);
         }
 
         [TestMethod]
         public void TestComputerPlayerChooseMoveValue2()
         {
             int DeterministicMove = 2;
-            WorkerComputerPlayerSelectMove(DeterministicMove);
+            int SelectedMove = WorkerComputerPlayerSelectMove(DeterministicMove);
+            Assert.AreEqual(DeterministicMove, SelectedMove);
         }
 
         [TestMethod]
@@ -94,7 +107,7 @@ namespace Tests
 
             int SelectedMove = WorkerStrategicComputerPlayerSelectMove(PreviousMove);
 
-            Assert.AreEqual(SelectedMove, 1);
+            Assert.AreEqual(1, SelectedMove);
         }
 
         [TestMethod]
@@ -104,7 +117,7 @@ namespace Tests
 
             int SelectedMove = WorkerStrategicComputerPlayerSelectMove(PreviousMove);
 
-            Assert.AreEqual(SelectedMove, 2);
+            Assert.AreEqual(2, SelectedMove);
         }
 
         [TestMethod]
@@ -114,7 +127,7 @@ namespace Tests
 
             int SelectedMove = WorkerStrategicComputerPlayerSelectMove(PreviousMove);
 
-            Assert.AreEqual(SelectedMove, 0);
+            Assert.AreEqual(0, SelectedMove);
         }
         
         private int WorkerHumanPlayerSelectMove(int[] consoleInputMove)
@@ -130,18 +143,16 @@ namespace Tests
             var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
 
             var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
-            return HumanPlayer.SelectMove(SupportedMoves);
+            return HumanPlayer.SelectMove(SupportedMoves, -1);
         }
 
-        private void WorkerComputerPlayerSelectMove(int deterministicMove)
+        private int WorkerComputerPlayerSelectMove(int deterministicMove)
         {
             var ComputerPlayer = Player.CreatePlayer(SupportedPlayers.ComputerPlayer, deterministicMove);
             var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
 
             var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
-            int SelectedMove = ComputerPlayer.SelectMove(SupportedMoves);
-
-            Assert.AreEqual(deterministicMove, SelectedMove);
+            return ComputerPlayer.SelectMove(SupportedMoves, -1);
         }
 
         private int WorkerStrategicComputerPlayerSelectMove(int previousMove)
@@ -150,7 +161,7 @@ namespace Tests
             var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
             var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
 
-            return StrategicComputerPlayer.SelectMove(SupportedMoves);
+            return StrategicComputerPlayer.SelectMove(SupportedMoves, -1);
         }
     }
 }

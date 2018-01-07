@@ -6,8 +6,11 @@ namespace Players
     {
         string Name { get; }
 
-        int SelectMove(List<string> supportedMoves);
+        int SelectMove(List<string> supportedMoves, int turnNumber);
+    }
 
+    public interface IStrategicPlayer
+    {
         void Reset();
     }
 }

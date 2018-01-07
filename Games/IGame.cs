@@ -11,5 +11,4 @@ namespace Games
 
         int DetermineTurnResult(int player1Move, int player2Move);
     }
-
 }

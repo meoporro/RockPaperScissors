@@ -23,7 +23,7 @@ namespace Players
             RandomGenerator = new DefaultRandom(value);
         }
 
-        public override int SelectMove(List<string> supportedMoves)
+        public override int SelectMove(List<string> supportedMoves, int turn)
         {
             int SelectedMove = RandomGenerator.Next(supportedMoves.Count);
             Console.WriteLine("\n" + Name + " selects " + supportedMoves[SelectedMove]);

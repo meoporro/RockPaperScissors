@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Players
 {
-    public class StrategicComputerPlayer : ComputerPlayer
+    public class StrategicComputerPlayer : ComputerPlayer, IStrategicPlayer
     {
         private static int StrategicComputerPlayerCounter = 1;
         private int PreviousMove;
@@ -19,8 +19,10 @@ namespace Players
             PreviousMove = previousMove;
         }
 
-        public override int SelectMove(List<string> supportedMoves)
+        public override int SelectMove(List<string> supportedMoves, int turn)
         {
+            if (turn == 0) Reset();
+
             int NumberSupportedMoves = supportedMoves.Count();
             int CurrentMove = PreviousMove == -1 ? RandomGenerator.Next(NumberSupportedMoves) : (PreviousMove + 1) % NumberSupportedMoves;
             PreviousMove = CurrentMove;
@@ -28,7 +30,7 @@ namespace Players
             return CurrentMove;
         }
 
-        public override void Reset()
+        public void Reset()
         {
             PreviousMove = -1;
         }

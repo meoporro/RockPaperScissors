@@ -10,7 +10,7 @@ namespace Players
         {
         }
 
-        public override int SelectMove(List<string> supportedMoves)
+        public override int SelectMove(List<string> supportedMoves, int turn)
         {
             Console.WriteLine("\n" + Name + ", select move:");
             for (int MoveIndex = 0; MoveIndex < supportedMoves.Count(); MoveIndex++)

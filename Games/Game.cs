@@ -32,7 +32,7 @@ namespace Games
             for (int Turn = 0; Turn < NumberOfTurns; Turn++)
             {
                 Console.WriteLine("\n" + "Turn " + (Turn + 1));
-                int TurnResult = DetermineTurnResult(player1.SelectMove(SupportedMoves), player2.SelectMove(SupportedMoves));
+                int TurnResult = DetermineTurnResult(player1.SelectMove(SupportedMoves, Turn), player2.SelectMove(SupportedMoves, Turn));
 
                 if (TurnResult == 0)
                 {
@@ -64,6 +64,9 @@ namespace Games
         {
             switch (selectedGame)
             {
+                case SupportedGames.Null:
+                    throw new ArgumentNullException();
+
                 case SupportedGames.RockPaperScissors:
                     return new RockPaperScissorsGame(numberOfTurns);
 
