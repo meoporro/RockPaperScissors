@@ -31,30 +31,33 @@ namespace Tests
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue0()
         {
-            int ConsoleInputMove = 0;
-            WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            int[] ConsoleInputMove = { 0 };
+            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
         }
 
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue1()
         {
-            int ConsoleInputMove = 1;
-            WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            int[] ConsoleInputMove = { 1 };
+            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
         }
 
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue2()
         {
-            int ConsoleInputMove = 2;
-            WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            int[] ConsoleInputMove = { 2 };
+            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]        
         public void TestHumanPlayerChooseMoveInvalidValue()
         {
-            int ConsoleInputMove = 4;
-            WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            int[] ConsoleInputMove = { 4, 2 };
+            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
+            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
         }
 
         private void WorkerTestPlayerFactory(SupportedPlayers selectedPlayerType, Type playerType)
@@ -114,17 +117,20 @@ namespace Tests
             Assert.AreEqual(SelectedMove, 0);
         }
         
-        private void WorkerHumanPlayerSelectMove(int consoleInputMove)
+        private int WorkerHumanPlayerSelectMove(int[] consoleInputMove)
         {
-            var ConsoleInput = new StringReader(consoleInputMove.ToString());
+            string ConsoleInputString = consoleInputMove[0].ToString();
+            for (int Index = 1; Index < consoleInputMove.Length; Index++)
+            {
+                ConsoleInputString = ConsoleInputString + "\n" + consoleInputMove[Index];
+            }
+            var ConsoleInput = new StringReader(ConsoleInputString);
             Console.SetIn(ConsoleInput);
             var HumanPlayer = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestHumanPlayer");
             var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
 
             var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
-            int SelectedMove = HumanPlayer.SelectMove(SupportedMoves);
-
-            Assert.AreEqual(consoleInputMove, SelectedMove);
+            return HumanPlayer.SelectMove(SupportedMoves);
         }
 
         private void WorkerComputerPlayerSelectMove(int deterministicMove)

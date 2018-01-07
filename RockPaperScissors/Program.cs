@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Games;
 using Players;
 
@@ -20,29 +18,53 @@ namespace RockPaperScissors
 
             IPlayer Player2 = CreatePlayer(2, SupportedPlayerList);
 
-            Console.WriteLine("\n" + "Which game do you want to play?");
-            foreach (SupportedGames SupportedGame in Enum.GetValues(typeof(SupportedGames)))
+            bool PlayAgain = true;
+            while(PlayAgain)
             {
-                if (SupportedGame == SupportedGames.Null) continue;
-                Console.WriteLine((int)SupportedGame + " - " + SupportedGame.ToString());
+                Console.WriteLine("\n" + "Which game do you want to play?");
+                var SupportedGamesList = Enum.GetValues(typeof(SupportedGames)).Cast<SupportedGames>().ToList();
+                foreach (SupportedGames SupportedGame in SupportedGamesList)
+                {
+                    if (SupportedGame == SupportedGames.Null) continue;
+                    Console.WriteLine((int)SupportedGame + " - " + SupportedGame.ToString());
+                }
+                int SelectedGameType = -1;
+                while (!Int32.TryParse(Console.ReadLine(), out SelectedGameType) || SelectedGameType < 0 || SelectedGameType >= SupportedGamesList.Count)
+                {
+                    Console.WriteLine("Please, select an admissible value.");
+                }
+
+                int NumberOfTurns = 3;
+                IGame GameToPlay = Game.CreateGame((SupportedGames)SelectedGameType, NumberOfTurns);
+
+                Console.WriteLine("\n" + "Game " + Player1.Name + " vs " + Player2.Name + " started!");
+
+                int GameResult = GameToPlay.Play(Player1, Player2);
+
+                if (GameResult == 0)
+                {
+                    Console.WriteLine("The game ended with a draw!");
+                }
+                else
+                {
+                    Console.WriteLine("\n" + (GameResult == 1 ? Player1.Name : Player2.Name) + " wins the Game!");
+                }
+
+                Console.WriteLine("\n" + "Do you want to play another game? y/n");
+
+                string PlayAgainInput = Console.ReadLine().ToLower();
+                while (PlayAgainInput != "y" && PlayAgainInput != "n")
+                {
+                    Console.WriteLine("Please type \"y\" or \"n\".");
+                    PlayAgainInput = Console.ReadLine().ToLower();
+                }
+
+                if (PlayAgainInput == "n") PlayAgain = false;
+                Player1.Reset();
+                Player2.Reset();
             }
-            int SelectedGameType = Int32.Parse(Console.ReadLine());
 
-            IGame GameToPlay = Game.CreateGame((SupportedGames)SelectedGameType, 3);
-
-            Console.WriteLine("\n" + "Game " + Player1.Name + " vs " + Player2.Name + " started!");
-
-            int GameResult = GameToPlay.Play(Player1, Player2);
-
-            if (GameResult == 0)
-            {
-                Console.WriteLine("The game ended with a draw!");
-            }
-            else
-            {
-                Console.WriteLine("\n" + (GameResult == 1 ? Player1.Name : Player2.Name) + " wins the Game!");
-            }
-
+            Console.WriteLine("\n" + "Bye!");
             Console.ReadLine();
         }
 
@@ -54,7 +76,12 @@ namespace RockPaperScissors
                 if (SupportedPlayer == SupportedPlayers.Null) continue;
                 Console.WriteLine((int)SupportedPlayer + " - " + SupportedPlayer.ToString());
             }
-            int SelectedPlayerType = Int32.Parse(Console.ReadLine());
+
+            int SelectedPlayerType = -1;
+            while (!Int32.TryParse(Console.ReadLine(), out SelectedPlayerType) || SelectedPlayerType < 0 || SelectedPlayerType >= supportedPlayers.Count)
+            {
+                Console.WriteLine("Please, select an admissible value.");
+            }
 
             string PlayerName = "";
             if (SelectedPlayerType == (int)SupportedPlayers.HumanPlayer)

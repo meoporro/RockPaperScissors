@@ -1,9 +1,6 @@
 ﻿using Players;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games
 {
@@ -34,7 +31,7 @@ namespace Games
             int Player2Wins = 0;
             for (int Turn = 0; Turn < NumberOfTurns; Turn++)
             {
-                Console.WriteLine("\n" + "Turn " + Turn);
+                Console.WriteLine("\n" + "Turn " + (Turn + 1));
                 int TurnResult = DetermineTurnResult(player1.SelectMove(SupportedMoves), player2.SelectMove(SupportedMoves));
 
                 if (TurnResult == 0)
@@ -42,10 +39,17 @@ namespace Games
                     Console.WriteLine("\n" + "It's a draw!");
                     continue;
                 }
-                Console.WriteLine("\n" + (TurnResult == 1 ? player1.Name : player2.Name) + " wins the turn!");
+                else
+                {
+                    Console.WriteLine("\n" + (TurnResult == 1 ? player1.Name : player2.Name) + " wins the turn!");
 
-                if (TurnResult == 1) Player1Wins++;
-                else Player2Wins++;
+                    if (TurnResult == 1) Player1Wins++;
+                    else Player2Wins++;
+                }
+                Console.WriteLine("\n" + "Current result: " +
+                    ((Player1Wins == Player2Wins) ?
+                        Player1Wins + " even." :
+                        player1.Name + " " + Player1Wins + ", " + player2.Name + " " + Player2Wins + "."));
 
                 if (Math.Max(Player1Wins, Player2Wins) == NumberOfTurns / 2 + 1) break;
             }

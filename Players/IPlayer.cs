@@ -11,5 +11,7 @@ namespace Players
         string Name { get; }
 
         int SelectMove(List<string> supportedMoves);
+
+        void Reset();
     }
 }

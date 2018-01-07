@@ -59,5 +59,8 @@ namespace Players
 
         public abstract int SelectMove(List<string> supportedMoves);
         
+        public virtual void Reset()
+        {
+        }
     }
 }

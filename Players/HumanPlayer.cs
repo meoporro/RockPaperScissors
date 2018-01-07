@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Players
 {
@@ -19,7 +17,14 @@ namespace Players
             {
                 Console.WriteLine(MoveIndex + " - " + supportedMoves[MoveIndex]);
             }
-            return Int32.Parse(Console.ReadLine());
+
+            int SelectedMove = -1;
+            while (!Int32.TryParse(Console.ReadLine(), out SelectedMove) || SelectedMove < 0 || SelectedMove >= supportedMoves.Count)
+            {
+                Console.WriteLine("Please, select an admissible value.");
+            }
+
+            return SelectedMove;
         }
     }
 }
