@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Players;
 using Games;
+using System.Linq;
 
 namespace Tests
 {
@@ -58,7 +59,7 @@ namespace Tests
 
         private void WorkerTestPlayerFactory(SupportedPlayers selectedPlayerType, Type playerType)
         {
-            var CreatedPlayer = Player.CreatePlayer(selectedPlayerType);
+            var CreatedPlayer = Player.CreatePlayer(selectedPlayerType, "TestPlayer");
             Assert.IsInstanceOfType(CreatedPlayer, playerType);
         }
 
@@ -112,12 +113,12 @@ namespace Tests
 
             Assert.AreEqual(SelectedMove, 0);
         }
-
+        
         private void WorkerHumanPlayerSelectMove(int consoleInputMove)
         {
-            var ConsoleInput = new StringReader("TestPlayer\n" + consoleInputMove.ToString());
+            var ConsoleInput = new StringReader(consoleInputMove.ToString());
             Console.SetIn(ConsoleInput);
-            var HumanPlayer = Player.CreatePlayer(SupportedPlayers.HumanPlayer);
+            var HumanPlayer = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestHumanPlayer");
             var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
 
             var SupportedMoves = RockPaperScissorsGame.SupportedMoves;

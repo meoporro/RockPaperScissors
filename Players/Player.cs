@@ -14,15 +14,20 @@ namespace Players
 
     public abstract class Player : IPlayer
     {
-        protected string _Name;
+        private string _Name;
         public string Name { get { return _Name; } }
         
-        public static IPlayer CreatePlayer(SupportedPlayers selectedPlayerType)
+        protected Player(string name)
+        {
+            _Name = name;
+        }
+
+        public static IPlayer CreatePlayer(SupportedPlayers selectedPlayerType, string name)
         {
             switch (selectedPlayerType)
             {
                 case SupportedPlayers.HumanPlayer:
-                    return new HumanPlayer();
+                    return new HumanPlayer(name);
 
                 case SupportedPlayers.ComputerPlayer:
                     return new ComputerPlayer();

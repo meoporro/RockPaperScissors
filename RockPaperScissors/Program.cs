@@ -12,33 +12,13 @@ namespace RockPaperScissors
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hi!\n");
+            Console.WriteLine("Hi!");
 
-            var SupportedPlayerList = Enum.GetValues(typeof(SupportedPlayers));
+            var SupportedPlayerList = Enum.GetValues(typeof(SupportedPlayers)).Cast<SupportedPlayers>().ToList();
 
-            Console.WriteLine("Select Player1 type:");
-            foreach (SupportedPlayers SupportedPlayer in SupportedPlayerList)
-            {
-                if (SupportedPlayer == SupportedPlayers.Null) continue;
-                Console.WriteLine((int)SupportedPlayer + " - " + SupportedPlayer.ToString());
-            }
-            int SelectedPlayer1Type = Int32.Parse(Console.ReadLine());
+            IPlayer Player1 = CreatePlayer(1, SupportedPlayerList);
 
-            Console.WriteLine();
-
-            IPlayer Player1 = Player.CreatePlayer((SupportedPlayers)SelectedPlayer1Type);
-
-            Console.WriteLine("\n" + "Select Player2 type:");
-            foreach (SupportedPlayers SupportedPlayer in SupportedPlayerList)
-            {
-                if (SupportedPlayer == SupportedPlayers.Null) continue;
-                Console.WriteLine((int)SupportedPlayer + " - " + SupportedPlayer.ToString());
-            }
-            int SelectedPlayer2Type = Int32.Parse(Console.ReadLine());
-
-            Console.WriteLine();
-
-            IPlayer Player2 = Player.CreatePlayer((SupportedPlayers)SelectedPlayer2Type);
+            IPlayer Player2 = CreatePlayer(2, SupportedPlayerList);
 
             Console.WriteLine("\n" + "Which game do you want to play?");
             foreach (SupportedGames SupportedGame in Enum.GetValues(typeof(SupportedGames)))
@@ -64,6 +44,26 @@ namespace RockPaperScissors
             }
 
             Console.ReadLine();
+        }
+
+        private static IPlayer CreatePlayer(int playerNumber, List<SupportedPlayers> supportedPlayers)
+        {
+            Console.WriteLine("\n" + "Select Player" + playerNumber + " type:");
+            foreach (SupportedPlayers SupportedPlayer in supportedPlayers)
+            {
+                if (SupportedPlayer == SupportedPlayers.Null) continue;
+                Console.WriteLine((int)SupportedPlayer + " - " + SupportedPlayer.ToString());
+            }
+            int SelectedPlayerType = Int32.Parse(Console.ReadLine());
+
+            string PlayerName = "";
+            if (SelectedPlayerType == (int)SupportedPlayers.HumanPlayer)
+            {
+                Console.WriteLine("What is your name?");
+                PlayerName = Console.ReadLine();
+            }
+
+            return Player.CreatePlayer((SupportedPlayers)SelectedPlayerType, PlayerName);
         }
     }
 }

@@ -8,10 +8,8 @@ namespace Players
 {
     public class HumanPlayer : Player
     {
-        internal HumanPlayer()
+        internal HumanPlayer(string name) : base(name)
         {
-            Console.WriteLine("What is your name?");
-            _Name = Console.ReadLine();
         }
 
         public override int SelectMove(List<string> supportedMoves)

@@ -149,7 +149,7 @@ namespace Tests
             int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
             int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
 
-            string ConsoleInputString = "TestPlayer1\n" + "TestPlayer2\n";
+            string ConsoleInputString = "";
             for (int Turn = 0; Turn < NumberOfTurns; Turn++)
             {
                 ConsoleInputString = ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
@@ -160,8 +160,36 @@ namespace Tests
 
             IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
 
-            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer);
-            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer);
+            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer1");
+            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer2");
+
+            int GameResult = GameToPlay.Play(Player1, Player2);
+
+            Assert.AreEqual(GameResult, 2);
+        }
+
+        [TestMethod]
+        public void TestPlayRockPaperScissorsGameEarlyEnd()
+        {
+            int NumberOfTurns = 3;
+            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+
+            int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
+            int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
+
+            string ConsoleInputString = "";
+            for (int Turn = 0; Turn < NumberOfTurns - 1; Turn++)
+            {
+                ConsoleInputString = ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
+            }
+
+            var ConsoleInput = new StringReader(ConsoleInputString);
+            Console.SetIn(ConsoleInput);
+
+            IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+
+            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer1");
+            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer2");
 
             int GameResult = GameToPlay.Play(Player1, Player2);
 

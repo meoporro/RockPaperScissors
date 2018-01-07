@@ -9,15 +9,19 @@ namespace Players
     public class ComputerPlayer : Player
     {
         protected Random RandomGenerator;
-        private int ComputerPlayerCounter = 1;
+        private static int ComputerPlayerCounter = 1;
 
-        internal ComputerPlayer()
+        internal ComputerPlayer() : base("Bot" + ComputerPlayerCounter++)
         {
-            _Name = "Bot" + ComputerPlayerCounter++;
             RandomGenerator = new Random();
         }
 
-        internal ComputerPlayer(int value)
+        protected ComputerPlayer(string name) : base(name)
+        {
+            RandomGenerator = new Random();
+        }
+
+        internal ComputerPlayer(int value) : base("Bot" + ComputerPlayerCounter++)
         {
             RandomGenerator = new DefaultRandom(value);
         }

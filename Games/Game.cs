@@ -47,7 +47,7 @@ namespace Games
                 if (TurnResult == 1) Player1Wins++;
                 else Player2Wins++;
 
-                if (Math.Max(Player1Wins, Player1Wins) == NumberOfTurns / 2 + 1) break;
+                if (Math.Max(Player1Wins, Player2Wins) == NumberOfTurns / 2 + 1) break;
             }
 
             if (Player1Wins > Player2Wins) return 1;

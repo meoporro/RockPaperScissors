@@ -8,12 +8,11 @@ namespace Players
 {
     public class StrategicComputerPlayer : ComputerPlayer
     {
-        private int StrategicComputerPlayerCounter = 1;
+        private static int StrategicComputerPlayerCounter = 1;
         private int PreviousMove;
 
-        internal StrategicComputerPlayer() : base()
+        internal StrategicComputerPlayer() : base("StrategicBot" + StrategicComputerPlayerCounter++.ToString())
         {
-            _Name = "StrategicBot" + StrategicComputerPlayerCounter++;
             PreviousMove = -1;
         }
 
