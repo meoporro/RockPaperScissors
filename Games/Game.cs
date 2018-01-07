@@ -31,15 +31,15 @@ namespace Games
         public int Play(IPlayer player1, IPlayer player2)
         {
             int Player1Wins = 0;
-            int Player2Wins = 1;
+            int Player2Wins = 0;
             for (int Turn = 0; Turn < NumberOfTurns; Turn++)
             {
-                Console.WriteLine("Turn " + Turn);
+                Console.WriteLine("\n" + "Turn " + Turn);
                 int TurnResult = DetermineTurnResult(player1.SelectMove(SupportedMoves), player2.SelectMove(SupportedMoves));
 
                 if (TurnResult == 0)
                 {
-                    Console.WriteLine("It's a draw!");
+                    Console.WriteLine("\n" + "It's a draw!");
                     continue;
                 }
                 Console.WriteLine("\n" + (TurnResult == 1 ? player1.Name : player2.Name) + " wins the turn!");

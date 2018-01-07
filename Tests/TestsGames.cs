@@ -196,6 +196,34 @@ namespace Tests
             Assert.AreEqual(GameResult, 2);
         }
 
+
+        [TestMethod]
+        public void TestPlayRockPaperScissorsGameCase1()
+        {
+            int NumberOfTurns = 3;
+            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+
+            int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
+            int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
+            int IndexScissorsMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
+
+            string ConsoleInputString = IndexRockMove.ToString() + "\n" + IndexRockMove.ToString() + "\n"
+                + IndexRockMove.ToString() + "\n" + IndexRockMove.ToString() + "\n"
+                + IndexRockMove.ToString() + "\n" + IndexRockMove.ToString() + "\n";
+            
+            var ConsoleInput = new StringReader(ConsoleInputString);
+            Console.SetIn(ConsoleInput);
+
+            IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+
+            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer1");
+            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer2");
+
+            int GameResult = GameToPlay.Play(Player1, Player2);
+
+            Assert.AreEqual(0, GameResult);
+        }
+
         private void WorkerTestGameFactory(SupportedGames selectedGameType, Type expectedGameType)
         {
             var NumberOfTurns = 3;
