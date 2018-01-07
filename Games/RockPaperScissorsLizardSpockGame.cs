@@ -5,7 +5,7 @@ namespace Games
 {
     public class RockPaperScissorsLizardSpockGame : Game
     {
-        public static readonly List<string> _SupportedMoves = new List<string>
+        private static readonly List<string> _SupportedMoves = new List<string>
         {
             "Paper", "Lizard", "Scissors", "Rock", "Spock"
         };
