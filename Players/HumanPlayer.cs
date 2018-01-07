@@ -8,9 +8,9 @@ namespace Players
 {
     public class HumanPlayer : Player
     {
-        public override void ChooseMove()
+        public override int SelectMove(List<string> supportedMoves)
         {
-            throw new NotImplementedException();
+            return Int32.Parse(Console.ReadLine());
         }
     }
 }

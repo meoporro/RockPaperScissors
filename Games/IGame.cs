@@ -9,6 +9,11 @@ namespace Games
 {
     public interface IGame
     {
+        List<string> SupportedMoves { get; }
+
         void Play(IPlayer player1, IPlayer player2);
+
+        int DetermineTurnResult(int player1Move, int player2Move);
     }
+
 }

@@ -8,6 +8,6 @@ namespace Players
 {
     public interface IPlayer
     {
-        void ChooseMove();
+        int SelectMove(List<string> supportedMoves);
     }
 }

@@ -23,10 +23,17 @@ namespace Games
             NumberOfTurns = numberOfTurns;
         }
 
+        public abstract List<string> SupportedMoves
+        {
+            get;
+        }
+
         public void Play(IPlayer player1, IPlayer player2)
         {
             throw new NotImplementedException();
         }
+
+        public abstract int DetermineTurnResult(int player1Move, int player2Move);
 
         public static IGame CreateGame(SupportedGames selectedGame, int numberOfTurns)
         {

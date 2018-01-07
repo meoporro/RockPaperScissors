@@ -20,16 +20,36 @@ namespace Players
             {
                 case SupportedPlayers.HumanPlayer:
                     return new HumanPlayer();
+
                 case SupportedPlayers.ComputerPlayer:
                     return new ComputerPlayer();
+
                 case SupportedPlayers.StrategicComputerPlayer:
                     return new StrategicComputerPlayer();
+
                 default:
                     throw new ArgumentException();
             }
         }
 
-        public abstract void ChooseMove();
+        public static IPlayer CreatePlayer(SupportedPlayers selectedPlayerType, int value)
+        {
+            switch (selectedPlayerType)
+            {
+                case SupportedPlayers.ComputerPlayer:
+                    return new ComputerPlayer(value);
+
+                case SupportedPlayers.StrategicComputerPlayer:
+                    return new StrategicComputerPlayer(value);
+
+                case SupportedPlayers.HumanPlayer:
+                default:
+                    throw new ArgumentException();
+            }
+        }
+
+
+        public abstract int SelectMove(List<string> supportedMoves);
         
     }
 }

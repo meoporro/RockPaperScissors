@@ -8,9 +8,35 @@ namespace Players
 {
     public class ComputerPlayer : Player
     {
-        public override void ChooseMove()
+        protected Random RandomGenerator;
+
+        internal ComputerPlayer()
         {
-            throw new NotImplementedException();
+            RandomGenerator = new Random();
+        }
+
+        internal ComputerPlayer(int value)
+        {
+            RandomGenerator = new DefaultRandom(value);
+        }
+
+        public override int SelectMove(List<string> supportedMoves)
+        {
+            return RandomGenerator.Next(supportedMoves.Count);
+        }
+
+        protected class DefaultRandom : Random
+        {
+            public DefaultRandom(int defaultValue)
+            {
+                DefaultValue = defaultValue;
+            }
+
+            private int DefaultValue;
+            public override int Next(int foo)
+            {
+                return DefaultValue;
+            }
         }
     }
 }
