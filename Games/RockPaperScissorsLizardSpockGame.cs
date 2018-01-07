@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games
 {
     public class RockPaperScissorsLizardSpockGame : Game
     {
-        private static List<string> _SupportedMoves = new List<string>()
+        public static readonly List<string> _SupportedMoves = new List<string>
         {
-            "Paper", "Lizard", "Scissors", "Spock", "Rock"
+            "Paper", "Lizard", "Scissors", "Rock", "Spock"
         };
 
         public override List<string> SupportedMoves
@@ -27,7 +24,20 @@ namespace Games
 
         public override int DetermineTurnResult(int player1Move, int player2Move)
         {
-            throw new NotImplementedException();
+            int circularIndexDistance = player1Move - player2Move + (player1Move >= player2Move ? 0 : _SupportedMoves.Count);
+            switch (circularIndexDistance)
+            {
+                case 0:
+                    return 0;
+                case 1:
+                case 2:
+                    return 1;
+                case 3:
+                case 4:
+                    return 2;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

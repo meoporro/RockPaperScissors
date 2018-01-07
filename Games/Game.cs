@@ -37,7 +37,6 @@ namespace Games
                 if (TurnResult == 0)
                 {
                     Console.WriteLine("\n" + "It's a draw!");
-                    continue;
                 }
                 else
                 {

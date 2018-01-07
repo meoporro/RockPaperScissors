@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Games
 {
     public class RockPaperScissorsGame : Game
     {
-        public static readonly List<string> _SupportedMoves = new List<string>()
+        public static readonly List<string> _SupportedMoves = new List<string>
         {
             "Paper", "Scissors", "Rock"
         };
@@ -27,7 +25,7 @@ namespace Games
 
         public override int DetermineTurnResult(int player1Move, int player2Move)
         {
-            int circularIndexDistance = player1Move - player2Move + (player1Move >= player2Move ? 0 : _SupportedMoves.Count());
+            int circularIndexDistance = player1Move - player2Move + (player1Move >= player2Move ? 0 : _SupportedMoves.Count);
             switch (circularIndexDistance)
             {
                 case 0:

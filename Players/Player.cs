@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Players
 {
@@ -55,7 +54,6 @@ namespace Players
                     throw new ArgumentException();
             }
         }
-
 
         public abstract int SelectMove(List<string> supportedMoves);
         
