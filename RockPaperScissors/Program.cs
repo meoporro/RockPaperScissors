@@ -44,7 +44,7 @@ namespace RockPaperScissors
 
                 if (gameResult == 0)
                 {
-                    Console.WriteLine("The game ended with a draw!");
+                    Console.WriteLine("\n" + "The game ended with a draw!");
                 }
                 else
                 {
