@@ -6,33 +6,33 @@ namespace Players
 {
     public class StrategicComputerPlayer : ComputerPlayer, IStrategicPlayer
     {
-        private static int StrategicComputerPlayerCounter = 1;
-        private int PreviousMove;
+        private static int _strategicComputerPlayerCounter = 1;
+        private int _previousMove;
 
-        internal StrategicComputerPlayer() : base("StrategicBot" + StrategicComputerPlayerCounter++.ToString())
+        internal StrategicComputerPlayer() : base("StrategicBot" + _strategicComputerPlayerCounter++.ToString())
         {
-            PreviousMove = -1;
+            _previousMove = -1;
         }
 
         internal StrategicComputerPlayer(int previousMove)
         {
-            PreviousMove = previousMove;
+            _previousMove = previousMove;
         }
 
         public override int SelectMove(List<string> supportedMoves, int turn)
         {
             if (turn == 0) Reset();
 
-            int NumberSupportedMoves = supportedMoves.Count();
-            int CurrentMove = PreviousMove == -1 ? RandomGenerator.Next(NumberSupportedMoves) : (PreviousMove + 1) % NumberSupportedMoves;
-            PreviousMove = CurrentMove;
-            Console.WriteLine("\n" + Name + " selects " + supportedMoves[CurrentMove]);
-            return CurrentMove;
+            int numberSupportedMoves = supportedMoves.Count();
+            int currentMove = _previousMove == -1 ? RandomGenerator.Next(numberSupportedMoves) : (_previousMove + 1) % numberSupportedMoves;
+            _previousMove = currentMove;
+            Console.WriteLine("\n" + Name + " selects " + supportedMoves[currentMove]);
+            return currentMove;
         }
 
         public void Reset()
         {
-            PreviousMove = -1;
+            _previousMove = -1;
         }
     }
 }

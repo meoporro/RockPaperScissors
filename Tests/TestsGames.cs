@@ -12,233 +12,156 @@ namespace Tests
         [TestMethod]
         public void TestGameFactoryRockPaperScissorsGame()
         {
-            var CreatedGame = WorkerTestGameFactory(SupportedGames.RockPaperScissors);
-            Assert.IsInstanceOfType(CreatedGame, typeof(RockPaperScissorsGame));
+            var createdGame = WorkerTestGameFactory(SupportedGame.RockPaperScissors);
+            Assert.IsInstanceOfType(createdGame, typeof(RockPaperScissorsGame));
         }
 
         [TestMethod]
         public void TestGameFactoryRockPaperScissorsLizardSpockGame()
         {
-            var CreatedGame = WorkerTestGameFactory(SupportedGames.RockPaperScissorsLizardSpock);
-            Assert.IsInstanceOfType(CreatedGame, typeof(RockPaperScissorsLizardSpockGame));
+            var createdGame = WorkerTestGameFactory(SupportedGame.RockPaperScissorsLizardSpock);
+            Assert.IsInstanceOfType(createdGame, typeof(RockPaperScissorsLizardSpockGame));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestGameFactoryNullArgument()
         {
-            var CreatedGame = WorkerTestGameFactory(SupportedGames.Null);
+            var createdGame = WorkerTestGameFactory(SupportedGame.Null);
         }
-
-        #region Test the combination of two moves
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCaseRockRock()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(0, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Rock", "Rock");
+            Assert.AreEqual(0, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCaseRockPaper()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(2, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Rock", "Paper");
+            Assert.AreEqual(2, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameRockScissors()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
-            
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(1, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Rock", "Scissors");
+            Assert.AreEqual(1, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCasePaperRock()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(1, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Paper", "Rock");
+            Assert.AreEqual(1, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCasePaperPaper()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(0, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Paper", "Paper");
+            Assert.AreEqual(0, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCasePaperScissors()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(2, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Paper", "Scissors");
+            Assert.AreEqual(2, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCaseScissorsRock()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(2, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Scissors", "Rock");
+            Assert.AreEqual(2, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCaseScissorsPaper()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(1, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Scissors", "Paper");
+            Assert.AreEqual(1, turnResult);
         }
 
         [TestMethod]
         public void TestDetermineTurnResultRockPaperScissorsGameCaseScissorsScissors()
         {
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 1);
-
-            int Player1Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
-            int Player2Move = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
-
-            int TurnResult = RockPaperScissorsGame.DetermineTurnResult(Player1Move, Player2Move);
-
-            Assert.AreEqual(0, TurnResult);
+            int turnResult = WorkerTestDetermineTurnResultGame(SupportedGame.RockPaperScissors, "Scissors", "Scissors");
+            Assert.AreEqual(0, turnResult);
         }
-
-        #endregion Test the combination of two moves
 
         [TestMethod]
         public void TestPlayRockPaperScissorsGameCase0()
         {
-            int NumberOfTurns = 3;
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+            int numberOfTurns = 3;
+            string[] player1Strategy = { "Rock", "Rock", "Rock" };
+            string[] player2Strategy = { "Paper", "Paper", "Paper" };
 
-            int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-            int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
+            int gameResult = WorkerTestPlayGame(SupportedGame.RockPaperScissors, numberOfTurns, player1Strategy, player2Strategy);
 
-            string ConsoleInputString = "";
-            for (int Turn = 0; Turn < NumberOfTurns; Turn++)
-            {
-                ConsoleInputString = ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
-            }
-
-            var ConsoleInput = new StringReader(ConsoleInputString);
-            Console.SetIn(ConsoleInput);
-
-            IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
-
-            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer1");
-            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer2");
-
-            int GameResult = GameToPlay.Play(Player1, Player2);
-
-            Assert.AreEqual(2, GameResult);
+            Assert.AreEqual(2, gameResult);
         }
 
         [TestMethod]
         public void TestPlayRockPaperScissorsGameCase0EarlyEnd()
         {
-            int NumberOfTurns = 3;
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+            int numberOfTurns = 3;
+            string[] player1Strategy = { "Rock", "Rock", "" };
+            string[] player2Strategy = { "Paper", "Paper", "" };
 
-            int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-            int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
+            int gameResult = WorkerTestPlayGame(SupportedGame.RockPaperScissors, numberOfTurns, player1Strategy, player2Strategy);
 
-            string ConsoleInputString = "";
-            for (int Turn = 0; Turn < NumberOfTurns - 1; Turn++)
-            {
-                ConsoleInputString = ConsoleInputString + IndexRockMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n";
-            }
-
-            var ConsoleInput = new StringReader(ConsoleInputString);
-            Console.SetIn(ConsoleInput);
-
-            IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
-
-            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer1");
-            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer2");
-
-            int GameResult = GameToPlay.Play(Player1, Player2);
-
-            Assert.AreEqual(2, GameResult);
+            Assert.AreEqual(2, gameResult);
         }
-
 
         [TestMethod]
         public void TestPlayRockPaperScissorsGameCase1()
         {
-            int NumberOfTurns = 3;
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
+            int numberOfTurns = 3;
+            string[] player1Strategy = { "Rock", "Paper", "Scissors" };
+            string[] player2Strategy = { "Rock", "Paper", "Scissors" };
 
-            int IndexRockMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Rock");
-            int IndexPaperMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Paper");
-            int IndexScissorsMove = RockPaperScissorsGame.SupportedMoves.IndexOf("Scissors");
+            int gameResult = WorkerTestPlayGame(SupportedGame.RockPaperScissors, numberOfTurns, player1Strategy, player2Strategy);
 
-            string ConsoleInputString = IndexRockMove.ToString() + "\n" + IndexRockMove.ToString() + "\n"
-                + IndexPaperMove.ToString() + "\n" + IndexPaperMove.ToString() + "\n"
-                + IndexScissorsMove.ToString() + "\n" + IndexScissorsMove.ToString() + "\n";
-            
-            var ConsoleInput = new StringReader(ConsoleInputString);
-            Console.SetIn(ConsoleInput);
-
-            IGame GameToPlay = Game.CreateGame(SupportedGames.RockPaperScissors, NumberOfTurns);
-
-            IPlayer Player1 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer1");
-            IPlayer Player2 = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestPlayer2");
-
-            int GameResult = GameToPlay.Play(Player1, Player2);
-
-            Assert.AreEqual(0, GameResult);
+            Assert.AreEqual(0, gameResult);
         }
 
-        private IGame WorkerTestGameFactory(SupportedGames selectedGameType)
+        private IGame WorkerTestGameFactory(SupportedGame selectedGameType)
         {
             var NumberOfTurns = 3;
             return Game.CreateGame(selectedGameType, NumberOfTurns);
+        }
+
+        private int WorkerTestDetermineTurnResultGame(SupportedGame selectedGame, string player1Move, string player2Move)
+        {
+            var game = Game.CreateGame(selectedGame, 1);
+
+            int Player1Move = game.SupportedMoves.IndexOf(player1Move);
+            int Player2Move = game.SupportedMoves.IndexOf(player2Move);
+
+            return game.DetermineTurnResult(Player1Move, Player2Move);
+        }
+
+        private int WorkerTestPlayGame(SupportedGame selectedGame, int numberOfTurns, string[] player1Strategy, string[] player2Strategy)
+        {
+            var game = Game.CreateGame(selectedGame, numberOfTurns);
+            var supportedMoves = game.SupportedMoves;
+
+            string consoleInputString = "";
+            for (int turn = 0; turn < numberOfTurns; turn++)
+            {
+                consoleInputString = consoleInputString + supportedMoves.IndexOf(player1Strategy[turn]) + "\n" + supportedMoves.IndexOf(player2Strategy[turn]) + "\n";
+            }
+            var consoleInput = new StringReader(consoleInputString);
+            Console.SetIn(consoleInput);
+
+            IPlayer player1 = Player.CreatePlayer(SupportedPlayer.HumanPlayer, "TestPlayer1");
+            IPlayer player2 = Player.CreatePlayer(SupportedPlayer.HumanPlayer, "TestPlayer2");
+
+            return game.Play(player1, player2);
         }
     }
 }

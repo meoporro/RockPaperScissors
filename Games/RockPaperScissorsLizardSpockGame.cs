@@ -5,7 +5,7 @@ namespace Games
 {
     public class RockPaperScissorsLizardSpockGame : Game
     {
-        private static readonly List<string> _SupportedMoves = new List<string>
+        private static readonly List<string> _supportedMoves = new List<string>
         {
             "Paper", "Lizard", "Scissors", "Rock", "Spock"
         };
@@ -14,7 +14,7 @@ namespace Games
         {
             get
             {
-                return _SupportedMoves;
+                return _supportedMoves;
             }
         }
 
@@ -24,7 +24,7 @@ namespace Games
 
         public override int DetermineTurnResult(int player1Move, int player2Move)
         {
-            int circularIndexDistance = player1Move - player2Move + (player1Move >= player2Move ? 0 : _SupportedMoves.Count);
+            int circularIndexDistance = player1Move - player2Move + (player1Move >= player2Move ? 0 : _supportedMoves.Count);
             switch (circularIndexDistance)
             {
                 case 0:

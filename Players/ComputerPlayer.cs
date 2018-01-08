@@ -5,10 +5,11 @@ namespace Players
 {
     public class ComputerPlayer : Player
     {
-        protected Random RandomGenerator;
-        private static int ComputerPlayerCounter = 1;
+        protected Random RandomGenerator { get; }
 
-        internal ComputerPlayer() : base("Bot" + ComputerPlayerCounter++)
+        private static int _computerPlayerCounter = 1;
+
+        internal ComputerPlayer() : base("Bot" + _computerPlayerCounter++)
         {
             RandomGenerator = new Random();
         }
@@ -18,29 +19,30 @@ namespace Players
             RandomGenerator = new Random();
         }
 
-        internal ComputerPlayer(int value) : base("Bot" + ComputerPlayerCounter++)
+        internal ComputerPlayer(int value) : base("Bot" + _computerPlayerCounter++)
         {
             RandomGenerator = new DefaultRandom(value);
         }
 
         public override int SelectMove(List<string> supportedMoves, int turn)
         {
-            int SelectedMove = RandomGenerator.Next(supportedMoves.Count);
-            Console.WriteLine("\n" + Name + " selects " + supportedMoves[SelectedMove]);
-            return SelectedMove;
+            int selectedMove = RandomGenerator.Next(supportedMoves.Count);
+            Console.WriteLine("\n" + Name + " selects " + supportedMoves[selectedMove]);
+            return selectedMove;
         }
 
-        protected class DefaultRandom : Random
+        private class DefaultRandom : Random
         {
+            private int _defaultValue;
+
             public DefaultRandom(int defaultValue)
             {
-                DefaultValue = defaultValue;
+                _defaultValue = defaultValue;
             }
 
-            private int DefaultValue;
             public override int Next(int foo)
             {
-                return DefaultValue;
+                return _defaultValue;
             }
         }
     }

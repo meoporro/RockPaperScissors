@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Players
 {
-    public enum SupportedPlayers
+    public enum SupportedPlayer
     {
-        Null = 0,
+        Null,
         HumanPlayer,
         ComputerPlayer,
         StrategicComputerPlayer
@@ -13,28 +13,27 @@ namespace Players
 
     public abstract class Player : IPlayer
     {
-        private string _Name;
-        public string Name { get { return _Name; } }
+        public string Name { get; }
         
         protected Player(string name)
         {
-            _Name = name;
+            Name = name;
         }
 
-        public static IPlayer CreatePlayer(SupportedPlayers selectedPlayerType, string name)
+        public static IPlayer CreatePlayer(SupportedPlayer selectedPlayerType, string name)
         {
             switch (selectedPlayerType)
             {
-                case SupportedPlayers.Null:
+                case SupportedPlayer.Null:
                     throw new ArgumentNullException();
 
-                case SupportedPlayers.HumanPlayer:
+                case SupportedPlayer.HumanPlayer:
                     return new HumanPlayer(name);
 
-                case SupportedPlayers.ComputerPlayer:
+                case SupportedPlayer.ComputerPlayer:
                     return new ComputerPlayer();
 
-                case SupportedPlayers.StrategicComputerPlayer:
+                case SupportedPlayer.StrategicComputerPlayer:
                     return new StrategicComputerPlayer();
 
                 default:
@@ -42,17 +41,17 @@ namespace Players
             }
         }
 
-        public static IPlayer CreatePlayer(SupportedPlayers selectedPlayerType, int value)
+        public static IPlayer CreatePlayer(SupportedPlayer selectedPlayerType, int value)
         {
             switch (selectedPlayerType)
             {
-                case SupportedPlayers.ComputerPlayer:
+                case SupportedPlayer.ComputerPlayer:
                     return new ComputerPlayer(value);
 
-                case SupportedPlayers.StrategicComputerPlayer:
+                case SupportedPlayer.StrategicComputerPlayer:
                     return new StrategicComputerPlayer(value);
 
-                case SupportedPlayers.HumanPlayer:
+                case SupportedPlayer.HumanPlayer:
                 default:
                     throw new ArgumentException();
             }

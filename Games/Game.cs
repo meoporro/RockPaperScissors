@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 namespace Games
 {
-    public enum SupportedGames
+    public enum SupportedGame
     {
-        Null = 0,
+        Null,
         RockPaperScissors,
         RockPaperScissorsLizardSpock
     }
 
     public abstract class Game : IGame
     {
-        private int NumberOfTurns { get; set; }
+        private readonly int _numberOfTurns;
 
         protected Game(int numberOfTurns)
         {
-            NumberOfTurns = numberOfTurns;
+            _numberOfTurns = numberOfTurns;
         }
 
         public abstract List<string> SupportedMoves
@@ -27,50 +27,50 @@ namespace Games
 
         public int Play(IPlayer player1, IPlayer player2)
         {
-            int Player1Wins = 0;
-            int Player2Wins = 0;
-            for (int Turn = 0; Turn < NumberOfTurns; Turn++)
+            int player1Wins = 0;
+            int player2Wins = 0;
+            for (int turn = 0; turn < _numberOfTurns; turn++)
             {
-                Console.WriteLine("\n" + "Turn " + (Turn + 1));
-                int TurnResult = DetermineTurnResult(player1.SelectMove(SupportedMoves, Turn), player2.SelectMove(SupportedMoves, Turn));
+                Console.WriteLine("\n" + "Turn " + (turn + 1));
+                int turnResult = DetermineTurnResult(player1.SelectMove(SupportedMoves, turn), player2.SelectMove(SupportedMoves, turn));
 
-                if (TurnResult == 0)
+                if (turnResult == 0)
                 {
                     Console.WriteLine("\n" + "It's a draw!");
                 }
                 else
                 {
-                    Console.WriteLine("\n" + (TurnResult == 1 ? player1.Name : player2.Name) + " wins the turn!");
+                    Console.WriteLine("\n" + (turnResult == 1 ? player1.Name : player2.Name) + " wins the turn!");
 
-                    if (TurnResult == 1) Player1Wins++;
-                    else Player2Wins++;
+                    if (turnResult == 1) player1Wins++;
+                    else player2Wins++;
                 }
                 Console.WriteLine("\n" + "Current result: " +
-                    ((Player1Wins == Player2Wins) ?
-                        Player1Wins + " even." :
-                        player1.Name + " " + Player1Wins + ", " + player2.Name + " " + Player2Wins + "."));
+                    ((player1Wins == player2Wins) ?
+                        player1Wins + " even." :
+                        player1.Name + " " + player1Wins + ", " + player2.Name + " " + player2Wins + "."));
 
-                if (Math.Max(Player1Wins, Player2Wins) == NumberOfTurns / 2 + 1) break;
+                if (Math.Max(player1Wins, player2Wins) == _numberOfTurns / 2 + 1) break;
             }
 
-            if (Player1Wins > Player2Wins) return 1;
-            else if (Player1Wins < Player2Wins) return 2;
+            if (player1Wins > player2Wins) return 1;
+            else if (player1Wins < player2Wins) return 2;
             else return 0;
         }
 
         public abstract int DetermineTurnResult(int player1Move, int player2Move);
 
-        public static IGame CreateGame(SupportedGames selectedGame, int numberOfTurns)
+        public static IGame CreateGame(SupportedGame selectedGame, int numberOfTurns)
         {
             switch (selectedGame)
             {
-                case SupportedGames.Null:
+                case SupportedGame.Null:
                     throw new ArgumentNullException();
 
-                case SupportedGames.RockPaperScissors:
+                case SupportedGame.RockPaperScissors:
                     return new RockPaperScissorsGame(numberOfTurns);
 
-                case SupportedGames.RockPaperScissorsLizardSpock:
+                case SupportedGame.RockPaperScissorsLizardSpock:
                     return new RockPaperScissorsLizardSpockGame(numberOfTurns);
 
                 default:

@@ -13,155 +13,149 @@ namespace Tests
         [TestMethod]
         public void TestPlayerFactoryHumanPlayer()
         {
-            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.HumanPlayer);
-            Assert.IsInstanceOfType(CreatedPlayer, typeof(HumanPlayer));
+            IPlayer createdPlayer = WorkerTestPlayerFactory(SupportedPlayer.HumanPlayer);
+            Assert.IsInstanceOfType(createdPlayer, typeof(HumanPlayer));
         }
 
         [TestMethod]
         public void TestPlayerFactoryComputerPlayer()
         {
-            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.ComputerPlayer);
-            Assert.IsInstanceOfType(CreatedPlayer, typeof(ComputerPlayer));
+            IPlayer createdPlayer = WorkerTestPlayerFactory(SupportedPlayer.ComputerPlayer);
+            Assert.IsInstanceOfType(createdPlayer, typeof(ComputerPlayer));
         }
 
         [TestMethod]
         public void TestPlayerFactoryStrategicComputerPlayer()
         {
-            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.StrategicComputerPlayer);
-            Assert.IsInstanceOfType(CreatedPlayer, typeof(StrategicComputerPlayer));
+            IPlayer createdPlayer = WorkerTestPlayerFactory(SupportedPlayer.StrategicComputerPlayer);
+            Assert.IsInstanceOfType(createdPlayer, typeof(StrategicComputerPlayer));
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void TestPlayerFactoryNullArgument()
         {
-            IPlayer CreatedPlayer = WorkerTestPlayerFactory(SupportedPlayers.Null);
-            Assert.IsInstanceOfType(CreatedPlayer, typeof(StrategicComputerPlayer));
+            IPlayer createdPlayer = WorkerTestPlayerFactory(SupportedPlayer.Null);
+            Assert.IsInstanceOfType(createdPlayer, typeof(StrategicComputerPlayer));
         }
         
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue0()
         {
-            int[] ConsoleInputMove = { 0 };
-            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
-            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
+            int[] consoleInputMove = { 0 };
+            int selectedMove = WorkerHumanPlayerSelectMove(consoleInputMove);
+            Assert.AreEqual(consoleInputMove.Last(), selectedMove);
         }
 
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue1()
         {
-            int[] ConsoleInputMove = { 1 };
-            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
-            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
+            int[] consoleInputMove = { 1 };
+            int selectedMove = WorkerHumanPlayerSelectMove(consoleInputMove);
+            Assert.AreEqual(consoleInputMove.Last(), selectedMove);
         }
 
         [TestMethod]
         public void TestHumanPlayerChooseMoveValue2()
         {
-            int[] ConsoleInputMove = { 2 };
-            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
-            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
+            int[] consoleInputMove = { 2 };
+            int selectedMove = WorkerHumanPlayerSelectMove(consoleInputMove);
+            Assert.AreEqual(consoleInputMove.Last(), selectedMove);
         }
 
         [TestMethod]
         public void TestHumanPlayerChooseMoveInvalidValue()
         {
-            int[] ConsoleInputMove = { 4, 2 };
-            int SelectedMove = WorkerHumanPlayerSelectMove(ConsoleInputMove);
-            Assert.AreEqual(ConsoleInputMove.Last(), SelectedMove);
-        }
-
-        private IPlayer WorkerTestPlayerFactory(SupportedPlayers selectedPlayerType)
-        {
-            return Player.CreatePlayer(selectedPlayerType, "TestPlayer");
+            int[] consoleInputMove = { 4, 2 };
+            int selectedMove = WorkerHumanPlayerSelectMove(consoleInputMove);
+            Assert.AreEqual(consoleInputMove.Last(), selectedMove);
         }
 
         [TestMethod]
         public void TestComputerPlayerChooseMoveValue0()
         {
-            int DeterministicMove = 0;
-            int SelectedMove = WorkerComputerPlayerSelectMove(DeterministicMove);
-            Assert.AreEqual(DeterministicMove, SelectedMove);
+            int deterministicMove = 0;
+            int selectedMove = WorkerComputerPlayerSelectMove(deterministicMove);
+            Assert.AreEqual(deterministicMove, selectedMove);
         }
 
         [TestMethod]
         public void TestComputerPlayerChooseMoveValue1()
         {
-            int DeterministicMove = 1;
-            int SelectedMove = WorkerComputerPlayerSelectMove(DeterministicMove);
-            Assert.AreEqual(DeterministicMove, SelectedMove);
+            int deterministicMove = 1;
+            int selectedMove = WorkerComputerPlayerSelectMove(deterministicMove);
+            Assert.AreEqual(deterministicMove, selectedMove);
         }
 
         [TestMethod]
         public void TestComputerPlayerChooseMoveValue2()
         {
-            int DeterministicMove = 2;
-            int SelectedMove = WorkerComputerPlayerSelectMove(DeterministicMove);
-            Assert.AreEqual(DeterministicMove, SelectedMove);
+            int deterministicMove = 2;
+            int selectedMove = WorkerComputerPlayerSelectMove(deterministicMove);
+            Assert.AreEqual(deterministicMove, selectedMove);
         }
 
         [TestMethod]
         public void TestComputerStrategicPlayerChooseMoveValue0()
         {
-            int PreviousMove = 0;
-
-            int SelectedMove = WorkerStrategicComputerPlayerSelectMove(PreviousMove);
-
-            Assert.AreEqual(1, SelectedMove);
+            int previousMove = 0;
+            int selectedMove = WorkerStrategicComputerPlayerSelectMove(previousMove);
+            Assert.AreEqual(1, selectedMove);
         }
 
         [TestMethod]
         public void TestComputerStrategicPlayerChooseMoveValue1()
         {
-            int PreviousMove = 1;
-
-            int SelectedMove = WorkerStrategicComputerPlayerSelectMove(PreviousMove);
-
-            Assert.AreEqual(2, SelectedMove);
+            int previousMove = 1;
+            int selectedMove = WorkerStrategicComputerPlayerSelectMove(previousMove);
+            Assert.AreEqual(2, selectedMove);
         }
 
         [TestMethod]
         public void TestComputerStrategicPlayerChooseMoveValue2()
         {
-            int PreviousMove = 2;
-
-            int SelectedMove = WorkerStrategicComputerPlayerSelectMove(PreviousMove);
-
-            Assert.AreEqual(0, SelectedMove);
+            int previousMove = 2;
+            int selectedMove = WorkerStrategicComputerPlayerSelectMove(previousMove);
+            Assert.AreEqual(0, selectedMove);
         }
         
-        private int WorkerHumanPlayerSelectMove(int[] consoleInputMove)
+        private IPlayer WorkerTestPlayerFactory(SupportedPlayer selectedPlayerType)
         {
-            string ConsoleInputString = consoleInputMove[0].ToString();
-            for (int Index = 1; Index < consoleInputMove.Length; Index++)
-            {
-                ConsoleInputString = ConsoleInputString + "\n" + consoleInputMove[Index];
-            }
-            var ConsoleInput = new StringReader(ConsoleInputString);
-            Console.SetIn(ConsoleInput);
-            var HumanPlayer = Player.CreatePlayer(SupportedPlayers.HumanPlayer, "TestHumanPlayer");
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
-
-            var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
-            return HumanPlayer.SelectMove(SupportedMoves, -1);
+            return Player.CreatePlayer(selectedPlayerType, "TestPlayer");
         }
 
+        private int WorkerHumanPlayerSelectMove(int[] consoleInputMove)
+        {
+            string consoleInputString = consoleInputMove[0].ToString();
+            for (int index = 1; index < consoleInputMove.Length; index++)
+            {
+                consoleInputString = consoleInputString + "\n" + consoleInputMove[index];
+            }
+            var consoleInput = new StringReader(consoleInputString);
+            Console.SetIn(consoleInput);
+            var humanPlayer = Player.CreatePlayer(SupportedPlayer.HumanPlayer, "TestHumanPlayer");
+            var rockPaperScissorsGame = Game.CreateGame(SupportedGame.RockPaperScissors, 3);
+
+            var supportedMoves = rockPaperScissorsGame.SupportedMoves;
+            return humanPlayer.SelectMove(supportedMoves, -1);
+        }
+        
         private int WorkerComputerPlayerSelectMove(int deterministicMove)
         {
-            var ComputerPlayer = Player.CreatePlayer(SupportedPlayers.ComputerPlayer, deterministicMove);
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
+            var computerPlayer = Player.CreatePlayer(SupportedPlayer.ComputerPlayer, deterministicMove);
+            var rockPaperScissorsGame = Game.CreateGame(SupportedGame.RockPaperScissors, 3);
 
-            var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
-            return ComputerPlayer.SelectMove(SupportedMoves, -1);
+            var supportedMoves = rockPaperScissorsGame.SupportedMoves;
+            return computerPlayer.SelectMove(supportedMoves, -1);
         }
 
         private int WorkerStrategicComputerPlayerSelectMove(int previousMove)
         {
-            var StrategicComputerPlayer = Player.CreatePlayer(SupportedPlayers.StrategicComputerPlayer, previousMove);
-            var RockPaperScissorsGame = Game.CreateGame(SupportedGames.RockPaperScissors, 3);
-            var SupportedMoves = RockPaperScissorsGame.SupportedMoves;
+            var strategicComputerPlayer = Player.CreatePlayer(SupportedPlayer.StrategicComputerPlayer, previousMove);
+            var rockPaperScissorsGame = Game.CreateGame(SupportedGame.RockPaperScissors, 3);
+            var supportedMoves = rockPaperScissorsGame.SupportedMoves;
 
-            return StrategicComputerPlayer.SelectMove(SupportedMoves, -1);
+            return strategicComputerPlayer.SelectMove(supportedMoves, -1);
         }
     }
 }

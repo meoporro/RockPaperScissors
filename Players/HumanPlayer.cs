@@ -13,18 +13,18 @@ namespace Players
         public override int SelectMove(List<string> supportedMoves, int turn)
         {
             Console.WriteLine("\n" + Name + ", select move:");
-            for (int MoveIndex = 0; MoveIndex < supportedMoves.Count(); MoveIndex++)
+            for (int moveIndex = 0; moveIndex < supportedMoves.Count(); moveIndex++)
             {
-                Console.WriteLine(MoveIndex + " - " + supportedMoves[MoveIndex]);
+                Console.WriteLine(moveIndex + " - " + supportedMoves[moveIndex]);
             }
 
-            int SelectedMove = -1;
-            while (!Int32.TryParse(Console.ReadLine(), out SelectedMove) || SelectedMove < 0 || SelectedMove >= supportedMoves.Count)
+            int selectedMove = -1;
+            while (!Int32.TryParse(Console.ReadLine(), out selectedMove) || selectedMove < 0 || selectedMove >= supportedMoves.Count)
             {
                 Console.WriteLine("Please, select an admissible value.");
             }
 
-            return SelectedMove;
+            return selectedMove;
         }
     }
 }
